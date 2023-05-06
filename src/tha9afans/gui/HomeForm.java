@@ -23,6 +23,13 @@ public class HomeForm extends Form{
         Button addEventBtn = new Button("Add Event");
         Button addSessionBtn = new Button("Add Session");
         Button showTaskBtn = new Button("Show Events");
+        Button showpanierBtn = new Button("Show Panier");
+
+
+
+
+
+
         
         //actions
         addEventBtn.addActionListener((evt) -> {
@@ -42,9 +49,17 @@ public class HomeForm extends Form{
            
             
         });
+
+
+        showpanierBtn.addActionListener((evt) -> {
+            new PanierProduit().show();
+
+
+
+        });
         
         //end
-        this.addAll(addEventBtn,addSessionBtn, showTaskBtn);
+        this.addAll(addEventBtn,addSessionBtn, showTaskBtn, showpanierBtn);
         
     }
     
