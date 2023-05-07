@@ -59,7 +59,7 @@ public class PanierProduit extends Form {
             totalPrice -= price;
             totalPriceLabel.setText("Total: " + totalPrice);
             productsContainer.revalidate();
-            productsContainer.repaint();
+            //productsContainer.repaint();
         });
 
         productsContainer.add(productContainer);
