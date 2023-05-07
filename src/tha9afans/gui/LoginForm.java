@@ -74,6 +74,17 @@ public class LoginForm extends Form  {
 //        signupbutton.requestFocus();
         Label doneHaveAnAccount = new Label("Vous n'avez aucune compte?");
         ImageViewer imglogo = new ImageViewer(theme.getImage("logo.png"));
+        btnlogin.addActionListener(e ->
+        {
+            ServiceUser.getInstance().signin(email , password);
+
+
+        });
+        signupbutton.addActionListener((evt) -> {
+
+            new SignUpForm().show();
+
+        });
         /*imglogo.setPreferredSize(new Dimension(400, 400));*/
         Container content = BoxLayout.encloseY(
                 labeltitle,
@@ -86,16 +97,7 @@ public class LoginForm extends Form  {
         );
         content.setScrollableY(true);
 
-        btnlogin.addActionListener(e ->
-        {
-            ServiceUser.getInstance().signin(email , password);
 
-        });
-        signupbutton.addActionListener((evt) -> {
-
-            new SignUpForm().show();
-
-        });
         /*mp.addActionListener((evt) -> {
 
             new ForgotPassword().show();
