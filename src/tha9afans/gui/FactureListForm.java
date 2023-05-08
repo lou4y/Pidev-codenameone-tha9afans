@@ -75,7 +75,7 @@ public class FactureListForm extends Form {
 
 
     public FactureListForm() {
-        super("Factures", BoxLayout.y());
+        super("List Factures", BoxLayout.y());
 
         // Fetch the list of invoices from the service
         List<Facture> factures = ServiceFacture.getInstance().FetchFacture();
