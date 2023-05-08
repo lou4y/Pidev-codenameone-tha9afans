@@ -46,16 +46,36 @@ public class Panier {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Panier panier)) return false;
-        return getId() == panier.getId() && Double.compare(panier.getTotal(), getTotal()) == 0 && Objects.equals(getUser(), panier.getUser());
+    public int hashCode() {
+        int hash = 5;
+        hash = 89 * hash + this.id;
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.total) ^ (Double.doubleToLongBits(this.total) >>> 32));
+        hash = 89 * hash + Objects.hashCode(this.user);
+        return hash;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getTotal(), getUser());
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Panier other = (Panier) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.total) != Double.doubleToLongBits(other.total)) {
+            return false;
+        }
+        return Objects.equals(this.user, other.user);
     }
+
+
 
     @Override
     public String toString() {

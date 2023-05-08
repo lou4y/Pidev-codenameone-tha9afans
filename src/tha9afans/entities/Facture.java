@@ -69,16 +69,45 @@ public class Facture {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Facture facture)) return false;
-        return getId() == facture.getId() && Objects.equals(getCommande(), facture.getCommande()) && Objects.equals(getDatefacture(), facture.getDatefacture()) && Objects.equals(getTva(), facture.getTva()) && Objects.equals(getRefrancefacture(), facture.getRefrancefacture());
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + this.id;
+        hash = 41 * hash + Objects.hashCode(this.commande);
+        hash = 41 * hash + Objects.hashCode(this.datefacture);
+        hash = 41 * hash + Objects.hashCode(this.tva);
+        hash = 41 * hash + Objects.hashCode(this.refrancefacture);
+        return hash;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getCommande(), getDatefacture(), getTva(), getRefrancefacture());
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Facture other = (Facture) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.refrancefacture, other.refrancefacture)) {
+            return false;
+        }
+        if (!Objects.equals(this.commande, other.commande)) {
+            return false;
+        }
+        if (!Objects.equals(this.datefacture, other.datefacture)) {
+            return false;
+        }
+        return Objects.equals(this.tva, other.tva);
     }
+
+    
+    
 
     @Override
     public String toString() {

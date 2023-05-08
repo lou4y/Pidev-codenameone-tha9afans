@@ -57,18 +57,42 @@ public class Commande {
         this.user = user;
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Commande commande)) return false;
-        return getId() == commande.getId() && Objects.equals(getDateCommande(), commande.getDateCommande()) && Objects.equals(getTotal(), commande.getTotal()) && Objects.equals(getUser(), commande.getUser());
-    }
-
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getDateCommande(), getTotal(), getUser());
+        int hash = 5;
+        hash = 61 * hash + this.id;
+        hash = 61 * hash + Objects.hashCode(this.dateCommande);
+        hash = 61 * hash + Objects.hashCode(this.total);
+        hash = 61 * hash + Objects.hashCode(this.user);
+        return hash;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Commande other = (Commande) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.dateCommande, other.dateCommande)) {
+            return false;
+        }
+        if (!Objects.equals(this.total, other.total)) {
+            return false;
+        }
+        return Objects.equals(this.user, other.user);
+    }
+
+
+
 
     @Override
     public String toString() {
