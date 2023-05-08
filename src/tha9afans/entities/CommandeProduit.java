@@ -57,16 +57,40 @@ public class CommandeProduit {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof CommandeProduit that)) return false;
-        return getId() == that.getId() && getQuantite() == that.getQuantite() && Objects.equals(getCommande(), that.getCommande()) && Objects.equals(getProduit(), that.getProduit());
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + this.id;
+        hash = 97 * hash + Objects.hashCode(this.commande);
+        hash = 97 * hash + this.quantite;
+        hash = 97 * hash + Objects.hashCode(this.produit);
+        return hash;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getCommande(), getQuantite(), getProduit());
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final CommandeProduit other = (CommandeProduit) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (this.quantite != other.quantite) {
+            return false;
+        }
+        if (!Objects.equals(this.commande, other.commande)) {
+            return false;
+        }
+        return Objects.equals(this.produit, other.produit);
     }
+
+
 
     @Override
     public String toString() {

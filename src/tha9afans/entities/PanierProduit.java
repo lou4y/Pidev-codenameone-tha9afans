@@ -63,16 +63,44 @@ public class PanierProduit {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof PanierProduit that)) return false;
-        return getQuantite() == that.getQuantite() && getId() == that.getId() && Float.compare(that.getSubtotal(), getSubtotal()) == 0 && Objects.equals(getPanier(), that.getPanier()) && Objects.equals(getProduit(), that.getProduit());
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.panier);
+        hash = 37 * hash + Objects.hashCode(this.produit);
+        hash = 37 * hash + this.quantite;
+        hash = 37 * hash + this.id;
+        hash = 37 * hash + Float.floatToIntBits(this.Subtotal);
+        return hash;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(getPanier(), getProduit(), getQuantite(), getId(), getSubtotal());
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PanierProduit other = (PanierProduit) obj;
+        if (this.quantite != other.quantite) {
+            return false;
+        }
+        if (this.id != other.id) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.Subtotal) != Float.floatToIntBits(other.Subtotal)) {
+            return false;
+        }
+        if (!Objects.equals(this.panier, other.panier)) {
+            return false;
+        }
+        return Objects.equals(this.produit, other.produit);
     }
+
+  
 
     @Override
     public String toString() {
