@@ -17,6 +17,7 @@ public class SessionManager {
     private static String adresse;
 
     private static String passowrd ;
+    private static String datenaissance;
     /*private static String photo;*/
 
     public static Preferences getPref() {
@@ -106,5 +107,11 @@ public class SessionManager {
         pref.set("photo",photo);
     }*/
 
+    public static String getDateNaissance() {
+        return pref.get("datenaissance",datenaissance);
+    }
 
+    public static void setDateNaissance(String dateNaissance) {
+        pref.set("datenaissance",datenaissance);
+    }
 }

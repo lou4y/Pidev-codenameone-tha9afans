@@ -54,7 +54,6 @@ public class Panier {
         return hash;
     }
 
-
     @Override
     public String toString() {
         return "Panier{" +

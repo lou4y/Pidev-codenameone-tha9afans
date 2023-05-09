@@ -35,7 +35,7 @@ public class FactureListForm extends Form {
 
     private Component createFactureLabel(Facture facture) {
         // Create a label to display the facture's details
-        String labelString =facture.getRefrancefacture()+facture.getDatefacture()+ facture.getCommande().getTotal();
+        String labelString =facture.getRefrancefacture()+facture.getTva();
         Label factureLabel = new Label(labelString);
 
         // Set the label's style

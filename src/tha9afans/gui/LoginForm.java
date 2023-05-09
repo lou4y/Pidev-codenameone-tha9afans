@@ -40,7 +40,7 @@ public class LoginForm extends Form  {
         Button signupbutton=new Button("Go Create Account");
 
         Label labeltitle = new Label("Sign In", "LogoLabel");
-        /*labeltitle.getAllStyles().setAlignment(Component.CENTER);
+        labeltitle.getAllStyles().setAlignment(Component.CENTER);
         labeltitle.getAllStyles().setFgColor(0xffffff);
         Font labelFont = Font.createTrueTypeFont("native:MainLight", "native:MainLight").derive(Display.getInstance().convertToPixels(7, true), Font.STYLE_BOLD);
         labeltitle.getUnselectedStyle().setFont(labelFont);
@@ -56,22 +56,22 @@ public class LoginForm extends Form  {
         btnlogin.getAllStyles().setBorder(Border.createEmpty());
         btnlogin.getPressedStyle().setBgColor(0x001A23);
         btnlogin.getPressedStyle().setFgColor(0xF1FAEE);
-        btnlogin.setWidth(50);*/
-//        btnlogin.requestFocus();
-//        //desgign for sign up button
-//        signupbutton.getAllStyles().setBgColor(0x001A23);
-//        signupbutton.getAllStyles().setFgColor(0xF1FAEE);
-//        signupbutton.getAllStyles().setBgTransparency(255);
-//        signupbutton.getAllStyles().setMarginUnit(Style.UNIT_TYPE_DIPS);
-//        signupbutton.getAllStyles().setMargin(2, 5, 2, 2);
-//        signupbutton.getAllStyles().setPaddingUnit(Style.UNIT_TYPE_DIPS);
-//        signupbutton.getAllStyles().setPadding(5, 5, 5, 5);
-//        signupbutton.getAllStyles().setAlignment(Component.CENTER);
-//        signupbutton.getAllStyles().setBorder(Border.createEmpty());
-//        signupbutton.getPressedStyle().setBgColor(0x001A23);
-//        signupbutton.getPressedStyle().setFgColor(0xF1FAEE);
-//        signupbutton.setWidth(50);
-//        signupbutton.requestFocus();
+        btnlogin.setWidth(50);
+        btnlogin.requestFocus();
+        //desgign for sign up button
+        signupbutton.getAllStyles().setBgColor(0x001A23);
+        signupbutton.getAllStyles().setFgColor(0xF1FAEE);
+        signupbutton.getAllStyles().setBgTransparency(255);
+        signupbutton.getAllStyles().setMarginUnit(Style.UNIT_TYPE_DIPS);
+        signupbutton.getAllStyles().setMargin(2, 5, 2, 2);
+        signupbutton.getAllStyles().setPaddingUnit(Style.UNIT_TYPE_DIPS);
+        signupbutton.getAllStyles().setPadding(5, 5, 5, 5);
+        signupbutton.getAllStyles().setAlignment(Component.CENTER);
+        signupbutton.getAllStyles().setBorder(Border.createEmpty());
+        signupbutton.getPressedStyle().setBgColor(0x001A23);
+        signupbutton.getPressedStyle().setFgColor(0xF1FAEE);
+        signupbutton.setWidth(50);
+        signupbutton.requestFocus();
         Label doneHaveAnAccount = new Label("Vous n'avez aucune compte?");
         ImageViewer imglogo = new ImageViewer(theme.getImage("logo.png"));
         btnlogin.addActionListener(e ->
@@ -85,7 +85,11 @@ public class LoginForm extends Form  {
             new SignUpForm().show();
 
         });
-        /*imglogo.setPreferredSize(new Dimension(400, 400));*/
+        mp.addActionListener((evt) -> {
+            new ForgotPassword().show();
+
+        });
+        imglogo.setPreferredSize(new Dimension(400, 400));
         Container content = BoxLayout.encloseY(
                 labeltitle,
                 imglogo,
@@ -98,11 +102,6 @@ public class LoginForm extends Form  {
         content.setScrollableY(true);
 
 
-        /*mp.addActionListener((evt) -> {
-
-            new ForgotPassword().show();
-
-        });*/
         this.addAll(content);
     }
 

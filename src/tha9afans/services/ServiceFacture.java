@@ -40,17 +40,18 @@ public class ServiceFacture {
     public ArrayList<Facture>affichageFactures() {
         ArrayList<Facture> result = new ArrayList<>();
         
-        String url = "https://127.0.0.1:8000/apifacture";
+        String url = Statics.BASE_URL+"/apifacture";
+        req = new ConnectionRequest(url, false);
+       
         req.setUrl(url);
         
-        req.addResponseListener(new ActionListener<NetworkEvent>() {
-            @Override
-            public void actionPerformed(NetworkEvent evt) {
-                JSONParser jsonp ;
-                jsonp = new JSONParser();
-                
-                try {
-                    Map<String,Object> mapFactures = jsonp.parseJSON(new CharArrayReader(new String(req.getResponseData()).toCharArray()));
+        req.addResponseListener((e) ->{
+
+            JSONParser j = new JSONParser();
+
+            String json = new String(req.getResponseData()) + "";
+            try {
+                    Map<String,Object> mapFactures =  j.parseJSON(new CharArrayReader(json.toCharArray()));
                     List<Map<String,Object>> listOfMaps = (List<Map<String,Object>>) mapFactures.get("root");
 
                     for (int i = 0; i < listOfMaps.size(); i++) {
@@ -64,7 +65,6 @@ public class ServiceFacture {
                        
                         
                         String refrancefacture = obj.get("refrancefacture").toString();
-                        float etat = Float.parseFloat(obj.get("etat").toString());
                         Double tva=Double.parseDouble(obj.get("tva").toString());
                         
                         fact.setId((int)id);
@@ -86,7 +86,7 @@ public class ServiceFacture {
                     ex.printStackTrace();
                 }
             
-            }
+            
         });
         
       NetworkManager.getInstance().addToQueueAndWait(req);//execution ta3 request sinon yet3ada chy dima nal9awha

@@ -66,7 +66,6 @@ public class CommandeProduit {
         return hash;
     }
 
-
     @Override
     public String toString() {
         return "CommandeProduit{" +

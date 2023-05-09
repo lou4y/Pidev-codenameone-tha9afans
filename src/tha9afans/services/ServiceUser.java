@@ -15,7 +15,9 @@ import tha9afans.gui.EditUser;
 import tha9afans.gui.EventList;
 import tha9afans.gui.SessionManager;
 import tha9afans.utilities.Statics;
+
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Map;
 import java.util.Vector;
 
@@ -182,6 +184,7 @@ public class ServiceUser {
         //ba3d execution ta3 requete ely heya url nestanaw response ta3 server.
         NetworkManager.getInstance().addToQueueAndWait(req);
         return json;
+    
     }
 
 

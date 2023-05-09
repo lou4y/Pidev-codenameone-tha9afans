@@ -12,13 +12,13 @@ public class User {
     private String[] roles;
     private boolean isBlocked;
     private String password,cin,nom,prenom,telephone,adresse;
-    private Date dateNaissance;
+    private String datenaissance;
     private InputStream photo;
     private boolean isVerified;
     private String resetToken,genre;
     private boolean twofactor;
 
-    public User(int id, String email, String[] roles, String password, String cin, String nom, String prenom, String telephone, String adresse, Date dateNaissance, InputStream photo, String genre) {
+    public User(int id, String email, String[] roles, String password, String cin, String nom, String prenom, String telephone, String adresse, String datenaissance, InputStream photo, String genre) {
         this.id = id;
         this.email = email;
         this.roles = roles;
@@ -28,12 +28,12 @@ public class User {
         this.prenom = prenom;
         this.telephone = telephone;
         this.adresse = adresse;
-        this.dateNaissance = dateNaissance;
+        this.datenaissance = datenaissance;
         this.photo = photo;
         this.genre = genre;
     }
 
-    public User(String email, String[] roles, String password, String cin, String nom, String prenom, String telephone, String adresse, Date dateNaissance, InputStream photo, String genre) {
+    public User(String email, String[] roles, String password, String cin, String nom, String prenom, String telephone, String adresse, String datenaissance, InputStream photo, String genre) {
         this.email = email;
         this.roles = roles;
         this.password = password;
@@ -42,7 +42,7 @@ public class User {
         this.prenom = prenom;
         this.telephone = telephone;
         this.adresse = adresse;
-        this.dateNaissance = dateNaissance;
+        this.datenaissance = datenaissance;
         this.photo = photo;
         this.genre = genre;
     }
@@ -127,12 +127,12 @@ public class User {
         this.adresse = adresse;
     }
 
-    public Date getDateNaissance() {
-        return dateNaissance;
+    public String getDatenaissance() {
+        return datenaissance;
     }
 
-    public void setDateNaissance(Date dateNaissance) {
-        this.dateNaissance = dateNaissance;
+    public void setDatenaissance(String datenaissance) {
+        this.datenaissance = datenaissance;
     }
 
     public InputStream getPhoto() {
