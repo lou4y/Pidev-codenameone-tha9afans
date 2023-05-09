@@ -1,25 +1,24 @@
 package tha9afans.entities;
 
-import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Commande {
     private int id;
-    private Timestamp dateCommande;
+    private String dateCommande;
     private Double total;
     private User user;
 
     public Commande() {
     }
 
-    public Commande(int id, Timestamp dateCommande, Double total, User user) {
+    public Commande(int id, String dateCommande, Double total, User user) {
         this.id = id;
         this.dateCommande = dateCommande;
         this.total = total;
         this.user = user;
     }
 
-    public Commande(Timestamp dateCommande, Double total, User user) {
+    public Commande(String dateCommande, Double total, User user) {
         this.dateCommande = dateCommande;
         this.total = total;
         this.user = user;
@@ -33,11 +32,11 @@ public class Commande {
         this.id = id;
     }
 
-    public Timestamp getDateCommande() {
+    public String getDateCommande() {
         return dateCommande;
     }
 
-    public void setDateCommande(Timestamp dateCommande) {
+    public void setDateCommande(String dateCommande) {
         this.dateCommande = dateCommande;
     }
 
@@ -57,13 +56,17 @@ public class Commande {
         this.user = user;
     }
 
-
-    
-
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getDateCommande(), getTotal(), getUser());
+        int hash = 5;
+        hash = 61 * hash + this.id;
+        hash = 61 * hash + Objects.hashCode(this.dateCommande);
+        hash = 61 * hash + Objects.hashCode(this.total);
+        hash = 61 * hash + Objects.hashCode(this.user);
+        return hash;
     }
+
+
 
     @Override
     public String toString() {

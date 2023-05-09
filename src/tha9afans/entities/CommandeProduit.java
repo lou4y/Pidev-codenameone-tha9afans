@@ -56,10 +56,14 @@ public class CommandeProduit {
         this.produit = produit;
     }
 
-   
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getCommande(), getQuantite(), getProduit());
+        int hash = 7;
+        hash = 97 * hash + this.id;
+        hash = 97 * hash + Objects.hashCode(this.commande);
+        hash = 97 * hash + this.quantite;
+        hash = 97 * hash + Objects.hashCode(this.produit);
+        return hash;
     }
 
     @Override

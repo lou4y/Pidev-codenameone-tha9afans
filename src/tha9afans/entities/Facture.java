@@ -1,19 +1,18 @@
 package tha9afans.entities;
 
-import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Facture {
     private int id;
     private Commande commande;
-    private Timestamp datefacture;
+    private String datefacture;
     private Double tva;
     private String refrancefacture;
 
     public Facture() {
     }
 
-    public Facture(int id, Commande commande, Timestamp datefacture, Double tva, String refrancefacture) {
+    public Facture(int id, Commande commande,String datefacture, Double tva, String refrancefacture) {
         this.id = id;
         this.commande = commande;
         this.datefacture = datefacture;
@@ -21,7 +20,7 @@ public class Facture {
         this.refrancefacture = refrancefacture;
     }
 
-    public Facture(Commande commande, Timestamp datefacture, Double tva, String refrancefacture) {
+    public Facture(Commande commande, String datefacture, Double tva, String refrancefacture) {
         this.commande = commande;
         this.datefacture = datefacture;
         this.tva = tva;
@@ -44,11 +43,11 @@ public class Facture {
         this.commande = commande;
     }
 
-    public Timestamp getDatefacture() {
+    public String getDatefacture() {
         return datefacture;
     }
 
-    public void setDatefacture(Timestamp datefacture) {
+    public void setDatefacture(String datefacture) {
         this.datefacture = datefacture;
     }
 
@@ -68,12 +67,17 @@ public class Facture {
         this.refrancefacture = refrancefacture;
     }
 
-   
-
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getCommande(), getDatefacture(), getTva(), getRefrancefacture());
+        int hash = 7;
+        hash = 41 * hash + this.id;
+        hash = 41 * hash + Objects.hashCode(this.commande);
+        hash = 41 * hash + Objects.hashCode(this.datefacture);
+        hash = 41 * hash + Objects.hashCode(this.tva);
+        hash = 41 * hash + Objects.hashCode(this.refrancefacture);
+        return hash;
     }
+    
 
     @Override
     public String toString() {
