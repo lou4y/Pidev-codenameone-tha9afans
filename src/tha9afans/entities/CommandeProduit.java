@@ -66,31 +66,6 @@ public class CommandeProduit {
         return hash;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final CommandeProduit other = (CommandeProduit) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (this.quantite != other.quantite) {
-            return false;
-        }
-        if (!Objects.equals(this.commande, other.commande)) {
-            return false;
-        }
-        return Objects.equals(this.produit, other.produit);
-    }
-
-
 
     @Override
     public String toString() {

@@ -1,99 +1,48 @@
 package tha9afans.gui;
 
-
-import com.codename1.components.MultiButton;
-import com.codename1.components.SpanLabel;
-import com.codename1.ui.Button;
+import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.layouts.BoxLayout;
+import java.util.List;
 import tha9afans.entities.Facture;
 import tha9afans.services.ServiceFacture;
 
-import java.util.List;
-
 public class FactureListForm extends Form {
 
- /*   private List<Facture> factures;
-
     public FactureListForm() {
-        super("Liste des factures", BoxLayout.y());
+        super("Liste des factures");
 
-        // Create a SpanLabel to display an informative message
-        SpanLabel infoLabel = new SpanLabel("Chargement des factures en cours...");
-        add(infoLabel);
+        // Use a vertical BoxLayout for the form's content pane
+        this.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
 
-        // Fetch the list of factures from the web service
-        ServiceFacture.getInstance().FetchFacture(((List<Facture> factures) -> {
-            // Clear the form's content and update the UI with the fetched data
-            removeAll();
-            if (factures == null) {
-                // Display an error message if no facture was retrieved
-                add(new Label("Une erreur est survenue lors du chargement des factures."));
-            } else if (factures.isEmpty()) {
-                // Display a message if no facture was retrieved
-                add(new Label("Aucune facture trouvée."));
-            } else {
-                // Create a Container to hold the facture details
-                Container factureContainer = new Container(BoxLayout.y());
-                for (Facture facture : factures) {
-                    // Create a Label to display each facture's details
-                    Label factureLabel = new Label(facture.getRefrancefacture() + " - " + facture.getDatefacture() + " - " + facture.getCommande().getTotal());
-                    factureContainer.add(factureLabel);
-                }
-                // Add the facture container to the form
-                add(factureContainer);
-            }
-            // Remove the info label from the form
-            removeComponent(infoLabel);
-        });
+        // Get the list of factures from the web service
+        List<Facture> factures = ServiceFacture.getInstance().affichageFactures();
+        //System.out.println(factures);
 
+        // Create a container to hold the facture labels
+        Container factureContainer = new Container();
+        factureContainer.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
 
-        // Add a refresh button to reload the list of factures
-        getToolbar().addCommandToRightBar("Actualiser", null, e -> {
-            infoLabel.setText("Chargement des factures en cours...");
-            ServiceFacture.getInstance().FetchFacture(((List<Facture> factures)-> {
-                removeAll();
-                if (factures == null) {
-                    add(new Label("Une erreur est survenue lors du chargement des factures."));
-                } else if (factures.isEmpty()) {
-                    add(new Label("Aucune facture trouvée."));
-                } else {
-                    Container factureContainer = new Container(BoxLayout.y());
-                    for (Facture facture : factures) {
-                        Label factureLabel = new Label(facture.getRefrancefacture() + " - " + facture.getDatefacture() + " - " + facture.getCommande().getTotal());
-                        factureContainer.add(factureLabel);
-                    }
-                    add(factureContainer);
-                }
-                removeComponent(infoLabel);
-            });
-        });
-    }*/
-
-
-
-    public FactureListForm() {
-        super("List Factures", BoxLayout.y());
-
-        // Fetch the list of invoices from the service
-        List<Facture> factures = ServiceFacture.getInstance().FetchFacture();
-
-        // Display a list of the invoices
+        // Add a label for each facture to the container
         for (Facture facture : factures) {
-            MultiButton mb = new MultiButton(facture.getRefrancefacture());
-            mb.setTextLine2("Date: " + facture.getDatefacture());
-            mb.setTextLine3("Total: " + facture.getCommande().getTotal());
-            add(mb);
+            factureContainer.addComponent(createFactureLabel(facture));
         }
+        // Add the facture container to the form's content pane
+        this.addComponent(factureContainer);
+    }
 
-        // Add a back button to return to the previous form
-        Button backButton = new Button("Retour");
-        backButton.addActionListener(e -> {
-            new HomeForm().show();
-        });
-        add(backButton);
+    private Component createFactureLabel(Facture facture) {
+        // Create a label to display the facture's details
+        String labelString =facture.getRefrancefacture()+facture.getDatefacture()+ facture.getCommande().getTotal();
+        Label factureLabel = new Label(labelString);
+
+        // Set the label's style
+        /*factureLabel.getStyle().setPadding(10, 10, 0, 10);
+        factureLabel.getStyle().setFont(Display.getInstance().getSystemFont());*/
+
+        return factureLabel;
     }
 }
 

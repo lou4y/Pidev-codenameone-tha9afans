@@ -1,24 +1,28 @@
 package tha9afans.services;
 
 import com.codename1.io.*;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.events.ActionListener;
+import tha9afans.entities.Commande;
 import tha9afans.entities.Facture;
 import tha9afans.utilities.Statics;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.sql.Timestamp;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+//import com.codename1.ui.List;
+
 import java.util.Map;
 
 public class ServiceFacture {
-
+    
     ConnectionRequest req;
     static ServiceFacture instance = null;
 
     //util
     boolean resultOK = false;
-    List<Facture> Factures = new ArrayList<>();
 
     //Constructor
     private ServiceFacture() {
@@ -33,103 +37,63 @@ public class ServiceFacture {
 
         return instance;
     }
-
-    //ACTIONS
-    //Add
-    public boolean AddFacture(Facture fc) {
-
-        //1
-        String addURL = Statics.BASE_URL + "";
-
-        //2
-        req.setUrl(addURL);
-
-        //3
-        req.setPost(false);
-
-        //4
-
-
-
-        //5
+    public ArrayList<Facture>affichageFactures() {
+        ArrayList<Facture> result = new ArrayList<>();
+        
+        String url = "https://127.0.0.1:8000/apifacture";
+        req.setUrl(url);
+        
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent evt) {
-                resultOK = req.getResponseCode() == 200;
-                req.removeResponseListener(this);
+                JSONParser jsonp ;
+                jsonp = new JSONParser();
+                
+                try {
+                    Map<String,Object> mapFactures = jsonp.parseJSON(new CharArrayReader(new String(req.getResponseData()).toCharArray()));
+                    List<Map<String,Object>> listOfMaps = (List<Map<String,Object>>) mapFactures.get("root");
+
+                    for (int i = 0; i < listOfMaps.size(); i++) {
+                        Map<String, Object> obj = listOfMaps.get(i);
+                        Facture fact = new Facture();
+                        
+                        //dima id fi codename one float 5outhouha
+                        float id = Float.parseFloat(obj.get("id").toString());
+                        System.out.println("id:"+id);
+                        
+                       
+                        
+                        String refrancefacture = obj.get("refrancefacture").toString();
+                        float etat = Float.parseFloat(obj.get("etat").toString());
+                        Double tva=Double.parseDouble(obj.get("tva").toString());
+                        
+                        fact.setId((int)id);
+                        fact.setRefrancefacture(refrancefacture);
+                        fact.setTva((Double) tva);
+                       
+                        
+                       
+                
+                        
+                        //insert data into ArrayList result
+                        result.add(fact);
+                       
+                    
+                    }
+                    
+                }catch(Exception ex) {
+                    
+                    ex.printStackTrace();
+                }
+            
             }
         });
-
-        NetworkManager.getInstance().addToQueueAndWait(req);
-
-        return resultOK;
+        
+      NetworkManager.getInstance().addToQueueAndWait(req);//execution ta3 request sinon yet3ada chy dima nal9awha
+        System.out.println("result"+result);
+        return result;
+        
+        
     }
-
-    //FETCH
-    public List<Facture> FetchFacture() {
-
-        req = new ConnectionRequest();
-
-        //1
-        String fetchURL = Statics.BASE_URL + "/apiproduit";
-
-        //2
-        req.setUrl(fetchURL);
-
-        //3
-        req.setPost(false);
-
-        //4
-        req.addResponseListener(new ActionListener<NetworkEvent>() {
-            @Override
-            public void actionPerformed(NetworkEvent evt) {
-                Factures = parseEvents(new String(req.getResponseData()));
-                req.removeResponseListener(this);
-            }
-        });
-
-        NetworkManager.getInstance().addToQueueAndWait(req);
-        return Factures;
-    }
-
-    //Parse
-    public List<Facture> parseEvents(String jsonText) {
-        System.out.println(jsonText);
-        // Initialize variables
-        List<Facture> factures = new ArrayList<>();
-        JSONParser parser = new JSONParser();
-
-        try {
-            // Parse the JSON text into a map
-            Map<String, Object> rootMap = parser.parseJSON(new CharArrayReader(jsonText.toCharArray()));
-
-            // Get the list of facture from the map
-            List<Map<String, Object>> facturesList = (List<Map<String, Object>>) rootMap.get("root");
-
-            // Iterate over the events list
-            for (Map<String, Object> factureMap : facturesList) {
-
-                // Create a new Facture object
-                Facture facture = new Facture();
-
-                // Parse the event properties from the map
-
-                facture.setRefrancefacture((String) factureMap.get("ref"));
-                facture.setDatefacture((Timestamp) factureMap.get("date"));
-                facture.getCommande().setTotal((double) factureMap.get("total"));
-
-
-                // Add the event to the list of facture objects
-                factures.add(facture);
-            }
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        // Return the list of facture objects
-        return factures;
-    }
-
 
 }

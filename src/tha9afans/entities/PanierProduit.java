@@ -73,33 +73,6 @@ public class PanierProduit {
         return hash;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final PanierProduit other = (PanierProduit) obj;
-        if (this.quantite != other.quantite) {
-            return false;
-        }
-        if (this.id != other.id) {
-            return false;
-        }
-        if (Float.floatToIntBits(this.Subtotal) != Float.floatToIntBits(other.Subtotal)) {
-            return false;
-        }
-        if (!Objects.equals(this.panier, other.panier)) {
-            return false;
-        }
-        return Objects.equals(this.produit, other.produit);
-    }
-
   
 
     @Override

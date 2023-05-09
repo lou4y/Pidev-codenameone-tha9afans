@@ -54,28 +54,6 @@ public class Panier {
         return hash;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Panier other = (Panier) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.total) != Double.doubleToLongBits(other.total)) {
-            return false;
-        }
-        return Objects.equals(this.user, other.user);
-    }
-
-
 
     @Override
     public String toString() {
