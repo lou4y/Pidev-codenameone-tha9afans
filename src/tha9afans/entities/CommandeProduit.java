@@ -56,13 +56,7 @@ public class CommandeProduit {
         this.produit = produit;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof CommandeProduit that)) return false;
-        return getId() == that.getId() && getQuantite() == that.getQuantite() && Objects.equals(getCommande(), that.getCommande()) && Objects.equals(getProduit(), that.getProduit());
-    }
-
+   
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getCommande(), getQuantite(), getProduit());

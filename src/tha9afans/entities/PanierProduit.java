@@ -62,12 +62,7 @@ public class PanierProduit {
         Subtotal = subtotal;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof PanierProduit that)) return false;
-        return getQuantite() == that.getQuantite() && getId() == that.getId() && Float.compare(that.getSubtotal(), getSubtotal()) == 0 && Objects.equals(getPanier(), that.getPanier()) && Objects.equals(getProduit(), that.getProduit());
-    }
+   
 
     @Override
     public int hashCode() {

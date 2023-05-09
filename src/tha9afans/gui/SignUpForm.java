@@ -19,12 +19,16 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.Border;
 import com.codename1.ui.plaf.Style;
-import com.codename1.ui.util.Resources; 
+import com.codename1.ui.spinner.Picker;
+import com.codename1.ui.util.Resources;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Component;
+import com.codename1.ui.plaf.UIManager;
 import tha9afans.services.ServiceUser;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 
 public class SignUpForm extends Form{
@@ -35,6 +39,7 @@ public class SignUpForm extends Form{
         this.getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, (evt) -> {
             new HomeForm().showBack();
         });
+        Resources theme = UIManager.initFirstTheme("/theme");
         TextField nom = new TextField("", "nom", 20, TextField.ANY);
         TextField prenom = new TextField("", "prenom", 20, TextField.ANY);
         TextField cin = new TextField("", "cin", 20, TextField.ANY);
@@ -43,6 +48,9 @@ public class SignUpForm extends Form{
         TextField confirmPassword = new TextField("", "Confirm Password", 20, TextField.PASSWORD);
         TextField adresse=new TextField("","adresse",20, TextField.ANY);
         TextField telephone=new TextField("","telephone",20, TextField.ANY);
+        Picker datePicker=new Picker();
+        datePicker.setType(Display.PICKER_TYPE_DATE);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         //Role
         //Vector 3ibara ala array 7atit fiha roles ta3na ba3d nzidouhom lel comboBox
         Vector<String> vectorGenre;
@@ -65,39 +73,46 @@ public class SignUpForm extends Form{
         //signIn.addActionListener(e -> new SignInForm(res).show());
         //signIn.setUIID("Link");
         Label alreadHaveAnAccount = new Label("Already have an account?");
-        Button signup = new Button("Sign Up");
+        Button signupbutton = new Button("Sign Up");
 
-        //signup.getAllStyles().setFgColor(0xF1FAEE);
-//        signup.getAllStyles().setBgTransparency(255);
-//        signup.getAllStyles().setAlignment(Component.CENTER);
-//        signup.getAllStyles().setBorder(Border.createEmpty())
-//        signup.getPressedStyle().setBgColor(0x001A23);
-//        signup.getPressedStyle().setFgColor(0xF1FAEE);
-//        signup.setWidth(50);
-//        signup.requestFocus();
-        signup.addActionListener((e) -> {
+        signupbutton.getAllStyles().setBgColor(0x001A23);
+        signupbutton.getAllStyles().setFgColor(0xF1FAEE);
+        signupbutton.getAllStyles().setBgTransparency(255);
+        signupbutton.getAllStyles().setMarginUnit(Style.UNIT_TYPE_DIPS);
+        signupbutton.getAllStyles().setMargin(2, 5, 2, 2);
+        signupbutton.getAllStyles().setPaddingUnit(Style.UNIT_TYPE_DIPS);
+        signupbutton.getAllStyles().setPadding(5, 5, 5, 5);
+        signupbutton.getAllStyles().setAlignment(Component.CENTER);
+        signupbutton.getAllStyles().setBorder(Border.createEmpty());
+        signupbutton.getPressedStyle().setBgColor(0x001A23);
+        signupbutton.getPressedStyle().setFgColor(0xF1FAEE);
+        signupbutton.setWidth(50);
+        signupbutton.requestFocus();
+        signupbutton.addActionListener((e) -> {
             try {
-                ServiceUser.getInstance().signup(nom,prenom,cin, password, email,genre,adresse,telephone);
+                
+                ServiceUser.getInstance().signup(nom,prenom,cin, password, email,genre,adresse,telephone,format.format(datePicker.getDate()));
             } catch (UnsupportedEncodingException ex) {
                 throw new RuntimeException(ex);
             }
             Dialog.show("Success","account is saved","OK",null);
             //new SignInForm(res).show();
         });
-        /*ImageViewer imglogo = new ImageViewer(this.getImage("logo.png"));
-        imglogo.setPreferredSize(new Dimension(400, 400));*/
+        ImageViewer imglogo = new ImageViewer(theme.getImage("logo.png"));
+        imglogo.setPreferredSize(new Dimension(400, 400));
 
         Label labeltitle = new Label("Sign Up", "LogoLabel");
-        /*labeltitle.getAllStyles().setAlignment(Component.CENTER);
+        labeltitle.getAllStyles().setAlignment(Component.CENTER);
         labeltitle.getAllStyles().setFgColor(0xffffff);
         Font labelFont = Font.createTrueTypeFont("native:MainLight", "native:MainLight").derive(Display.getInstance().convertToPixels(7, true), Font.STYLE_BOLD);
         labeltitle.getUnselectedStyle().setFont(labelFont);
-        labeltitle.getAllStyles().setFgColor(0x001A23);*/
+        labeltitle.getAllStyles().setFgColor(0x001A23);
 
 
 
         Container content = BoxLayout.encloseY(
                 labeltitle,
+                //imglogo,
                 new FloatingHint(nom),
                 new FloatingHint(prenom),
                 new FloatingHint(email),
@@ -106,7 +121,7 @@ public class SignUpForm extends Form{
                 new FloatingHint(adresse),
                 new FloatingHint(telephone),
                 genre,
-                signup
+                signupbutton
         );
         content.setScrollableY(true);
         this.addAll(content);

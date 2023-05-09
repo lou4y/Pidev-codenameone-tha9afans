@@ -68,12 +68,7 @@ public class Facture {
         this.refrancefacture = refrancefacture;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Facture facture)) return false;
-        return getId() == facture.getId() && Objects.equals(getCommande(), facture.getCommande()) && Objects.equals(getDatefacture(), facture.getDatefacture()) && Objects.equals(getTva(), facture.getTva()) && Objects.equals(getRefrancefacture(), facture.getRefrancefacture());
-    }
+   
 
     @Override
     public int hashCode() {

@@ -58,12 +58,7 @@ public class Commande {
     }
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Commande commande)) return false;
-        return getId() == commande.getId() && Objects.equals(getDateCommande(), commande.getDateCommande()) && Objects.equals(getTotal(), commande.getTotal()) && Objects.equals(getUser(), commande.getUser());
-    }
+    
 
     @Override
     public int hashCode() {
