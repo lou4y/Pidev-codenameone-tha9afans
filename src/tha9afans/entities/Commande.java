@@ -56,13 +56,17 @@ public class Commande {
         this.user = user;
     }
 
-
- 
-
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getDateCommande(), getTotal(), getUser());
+        int hash = 5;
+        hash = 61 * hash + this.id;
+        hash = 61 * hash + Objects.hashCode(this.dateCommande);
+        hash = 61 * hash + Objects.hashCode(this.total);
+        hash = 61 * hash + Objects.hashCode(this.user);
+        return hash;
     }
+
+
 
     @Override
     public String toString() {

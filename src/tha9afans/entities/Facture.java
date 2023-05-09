@@ -67,12 +67,17 @@ public class Facture {
         this.refrancefacture = refrancefacture;
     }
 
-  
-
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getCommande(), getDatefacture(), getTva(), getRefrancefacture());
+        int hash = 7;
+        hash = 41 * hash + this.id;
+        hash = 41 * hash + Objects.hashCode(this.commande);
+        hash = 41 * hash + Objects.hashCode(this.datefacture);
+        hash = 41 * hash + Objects.hashCode(this.tva);
+        hash = 41 * hash + Objects.hashCode(this.refrancefacture);
+        return hash;
     }
+    
 
     @Override
     public String toString() {

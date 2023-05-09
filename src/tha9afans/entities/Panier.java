@@ -45,12 +45,15 @@ public class Panier {
         this.user = user;
     }
 
-  
-
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTotal(), getUser());
+        int hash = 5;
+        hash = 89 * hash + this.id;
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.total) ^ (Double.doubleToLongBits(this.total) >>> 32));
+        hash = 89 * hash + Objects.hashCode(this.user);
+        return hash;
     }
+
 
     @Override
     public String toString() {

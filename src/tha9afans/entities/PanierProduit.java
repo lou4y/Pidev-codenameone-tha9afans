@@ -62,12 +62,18 @@ public class PanierProduit {
         Subtotal = subtotal;
     }
 
-   
-
     @Override
     public int hashCode() {
-        return Objects.hash(getPanier(), getProduit(), getQuantite(), getId(), getSubtotal());
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.panier);
+        hash = 37 * hash + Objects.hashCode(this.produit);
+        hash = 37 * hash + this.quantite;
+        hash = 37 * hash + this.id;
+        hash = 37 * hash + Float.floatToIntBits(this.Subtotal);
+        return hash;
     }
+
+  
 
     @Override
     public String toString() {
