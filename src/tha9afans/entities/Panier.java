@@ -45,12 +45,7 @@ public class Panier {
         this.user = user;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Panier panier)) return false;
-        return getId() == panier.getId() && Double.compare(panier.getTotal(), getTotal()) == 0 && Objects.equals(getUser(), panier.getUser());
-    }
+  
 
     @Override
     public int hashCode() {

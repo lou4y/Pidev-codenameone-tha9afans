@@ -18,8 +18,8 @@ public class FactureListForm extends Form {
         this.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
 
         // Get the list of factures from the web service
-        List<Facture> factures = ServiceFacture.getFactures();
-        System.out.println(factures);
+        List<Facture> factures = ServiceFacture.getInstance().affichageFactures();
+        //System.out.println(factures);
 
         // Create a container to hold the facture labels
         Container factureContainer = new Container();
@@ -35,8 +35,7 @@ public class FactureListForm extends Form {
 
     private Component createFactureLabel(Facture facture) {
         // Create a label to display the facture's details
-        String labelString = String.format("Référence: %s | Date: %s | Total: %.2f",
-                facture.getRefrancefacture(), facture.getDatefacture().toString(), facture.getCommande().getTotal());
+        String labelString =facture.getRefrancefacture()+facture.getDatefacture()+ facture.getCommande().getTotal();
         Label factureLabel = new Label(labelString);
 
         // Set the label's style
