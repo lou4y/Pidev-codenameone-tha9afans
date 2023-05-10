@@ -8,6 +8,9 @@ public class Facture {
     private String datefacture;
     private Double tva;
     private String refrancefacture;
+    private String useremail;
+    private String nomproduit;
+    private Double totale;
 
     public Facture() {
     }
@@ -67,6 +70,31 @@ public class Facture {
         this.refrancefacture = refrancefacture;
     }
 
+    public String getUseremail() {
+        return useremail;
+    }
+
+    public void setUseremail(String useremail) {
+        this.useremail = useremail;
+    }
+
+    public String getNomproduit() {
+        return nomproduit;
+    }
+
+    public void setNomproduit(String nomproduit) {
+        this.nomproduit = nomproduit;
+    }
+
+    public Double getTotale() {
+        return totale;
+    }
+
+    public void setTotale(Double totale) {
+        this.totale = totale;
+    }
+    
+    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -77,16 +105,14 @@ public class Facture {
         hash = 41 * hash + Objects.hashCode(this.refrancefacture);
         return hash;
     }
-    
 
     @Override
     public String toString() {
-        return "Facture{" +
-                "id=" + id +
-                ", commande=" + commande +
-                ", datefacture=" + datefacture +
-                ", tva=" + tva +
-                ", refrancefacture='" + refrancefacture + '\'' +
-                '}';
+        return "Facture{" + "id=" + id + ", commande=" + commande + ", datefacture=" + datefacture + ", tva=" + tva + ", refrancefacture=" + refrancefacture + ", useremail=" + useremail + ", nomproduit=" + nomproduit + ", totale=" + totale + '}';
     }
+
+    
+    
+
+   
 }

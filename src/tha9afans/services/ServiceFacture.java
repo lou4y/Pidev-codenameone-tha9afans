@@ -10,6 +10,7 @@ import tha9afans.utilities.Statics;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
 import java.util.ArrayList;
 import java.util.List;
 //import com.codename1.ui.List;
@@ -60,23 +61,25 @@ public class ServiceFacture {
                         
                         //dima id fi codename one float 5outhouha
                         float id = Float.parseFloat(obj.get("id").toString());
-                        System.out.println("id:"+id);
-                        
-                       
-                        
+   
                         String refrancefacture = obj.get("refrancefacture").toString();
-                        Double tva=Double.parseDouble(obj.get("tva").toString());
+                        Double tva=(Double)obj.get("tva");
+                        String nomproduit= obj.get("nomproduit").toString();
+                        String useremail=obj.get("useremail").toString();
+                        Double totale=(Double) obj.get("totale");
+                        String datefacture=obj.get("datefacture").toString();
                         
                         fact.setId((int)id);
                         fact.setRefrancefacture(refrancefacture);
-                        fact.setTva((Double) tva);
-                       
-                        
-                       
-                
-                        
+                        fact.setTva(tva);
+                        fact.setDatefacture(datefacture);
+                        fact.setNomproduit(nomproduit);
+                        fact.setUseremail(useremail);
+                        fact.setTotale(totale);
+                    
                         //insert data into ArrayList result
                         result.add(fact);
+                        System.out.println(fact);
                        
                     
                     }
