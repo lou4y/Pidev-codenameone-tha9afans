@@ -27,6 +27,7 @@ public class ServiceFacture {
     //Constructor
     private ServiceFacture() {
         req = new ConnectionRequest();
+        req.setInsecure(true);
     }
 
     //Singleton
