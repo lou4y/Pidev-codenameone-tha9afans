@@ -66,7 +66,7 @@ public class QuizHomeForm extends Form {
 
         // Add the quiz list container to the form
         add(BorderLayout.CENTER, quizListContainer);
-
+       //this is a show method
         show();
 
     }
