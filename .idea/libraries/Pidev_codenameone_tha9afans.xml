@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Pidev-codenameone-tha9afans">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/JavaSE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/nbproject.zip!/" />
+      <root url="jar://$PROJECT_DIR$/CodeNameOneBuildClient.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
