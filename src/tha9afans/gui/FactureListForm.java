@@ -27,7 +27,7 @@ public class FactureListForm extends Form {
 
         // Use a vertical BoxLayout for the form's content pane
         this.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-        
+
         // Add a back button to the toolbar
         this.getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, (evt) -> {
             new HomeForm().showBack();
@@ -35,7 +35,7 @@ public class FactureListForm extends Form {
 
         // Get the list of factures from the web service
         List<Facture> factures = ServiceFacture.getInstance().affichageFactures();
-        
+
         // Create a container to hold the facture labels and the PDF buttons
         Container content = new Container();
         content.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
@@ -62,10 +62,10 @@ public class FactureListForm extends Form {
         Label factureLabel = new Label(labelString);
 
         // Set the label's style
-        
+
         return factureLabel;
     }
-    
+
     private Button createPDFButton(Facture facture) {
         // Create a PDF button for the given facture
         Button pdfButton = new Button("Export PDF");
@@ -75,30 +75,30 @@ public class FactureListForm extends Form {
         });
         return pdfButton;
     }
- private void generatePDF(Facture facture) {
-    try {
-        // Initialize the PDF document
-        Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\bla9_\\Desktop\\web\\" + facture.getRefrancefacture() + ".pdf"));
-        document.open();
-        
-        // Add the facture details to the PDF document
-        Paragraph paragraph = new Paragraph("Facture Details");
-        paragraph.setAlignment(Element.ALIGN_CENTER);
-        document.add(paragraph);
-        document.add(new Paragraph("Référence facture: " + facture.getRefrancefacture()));
-        document.add(new Paragraph("TVA: " + facture.getTva()));
-        
-        // Close the PDF document
-        document.close();
-        
-        // Show a success message
-        Dialog.show("Success", "The PDF file has been downloaded to C:\\Users\\bla9_\\Desktop\\web\\" + facture.getRefrancefacture() + ".pdf", "OK", null);
+    private void generatePDF(Facture facture) {
+        try {
+            // Initialize the PDF document
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\bla9_\\Desktop\\web\\" + facture.getRefrancefacture() + ".pdf"));
+            document.open();
 
-    } catch (Exception e) {
-        e.printStackTrace();
+            // Add the facture details to the PDF document
+            Paragraph paragraph = new Paragraph("Facture Details");
+            paragraph.setAlignment(Element.ALIGN_CENTER);
+            document.add(paragraph);
+            document.add(new Paragraph("Référence facture: " + facture.getRefrancefacture()));
+            document.add(new Paragraph("TVA: " + facture.getTva()));
+
+            // Close the PDF document
+            document.close();
+
+            // Show a success message
+            Dialog.show("Success", "The PDF file has been downloaded to C:\\Users\\bla9_\\Desktop\\web\\" + facture.getRefrancefacture() + ".pdf", "OK", null);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-}
 
 
 
