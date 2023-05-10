@@ -26,6 +26,7 @@ public class HomeForm extends Form{
         Button showpanierBtn = new Button("Show Panier");
         Button showFactureBtn = new Button("Show Facture");
         Button signupUser=new Button("signUp");
+        Button quizBtn = new Button ("Quiz");
 
 
 
@@ -67,8 +68,12 @@ public class HomeForm extends Form{
             new LoginForm().show();
         });
         
+        quizBtn.addActionListener((evt) -> {
+            new QuizHomeForm().show();
+        });
+        
         //end
-        this.addAll(addEventBtn,addSessionBtn, showTaskBtn, showpanierBtn,signupUser,showFactureBtn);
+        this.addAll(addEventBtn,addSessionBtn, showTaskBtn, showpanierBtn,signupUser,showFactureBtn, quizBtn);
         
     }
     
