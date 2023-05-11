@@ -41,7 +41,7 @@ public class AddEvent extends Form {
         String str="2015-03-31";   
         Evenement ev =new Evenement(name.getText(),description.getText(),Address.getText(),str,"music",1);
         System.out.println(ev);
-        
+        ////////////////////////////////////
         //actions
         submitBtn.addActionListener((evt) -> {
                if (se.AddEvent(ev)) {
