@@ -60,12 +60,12 @@ public class FactureListForm extends Form {
     private Component createFactureLabel(Facture facture) {
         // Create a label to display the facture's details
         String labelString = facture.getRefrancefacture();
-        String useremail="Votre email: "+facture.getUseremail();
+        //String useremail="Votre email: "+facture.getUseremail();
         String nomproduit="Votre produit: "+facture.getNomproduit();
         String datefacture="La date de facture: "+facture.getDatefacture();
         String tva="TVA : "+facture.getTva();
         String total="le total est: "+facture.getTotale();
-        String factureText = labelString + "\n" + datefacture + "\n" + useremail + "\n" + nomproduit + "\n" + tva + "\n" + total;
+        String factureText = labelString + "\n" + datefacture + "\n" + nomproduit + "\n" + tva + "\n" + total;
     
         SpanLabel factureLabel = new SpanLabel(factureText);
 
@@ -93,7 +93,7 @@ private void generatePDF(Facture facture) {
         // Add the facture details to the PDF document
         document.add(new Paragraph("Facture Details"));
         document.add(new Paragraph("Référence facture: " + facture.getRefrancefacture()));
-        document.add(new Paragraph("Votre email: " + facture.getUseremail()));
+        //document.add(new Paragraph("Votre email: " + facture.getUseremail()));
         document.add(new Paragraph("Votre produit: " + facture.getNomproduit()));
         document.add(new Paragraph("La date de facture: " + facture.getDatefacture()));
         document.add(new Paragraph("TVA: " + facture.getTva()));
