@@ -68,6 +68,7 @@ public class ServiceEvenement {
             @Override
             public void actionPerformed(NetworkEvent evt) {
                 resultOK = req.getResponseCode() == 200;
+                System.out.println(req.getResponseData());
                 req.removeResponseListener(this);
             }
         });

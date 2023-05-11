@@ -64,7 +64,7 @@ public class ServiceFacture {
    
                         String refrancefacture = obj.get("refrancefacture").toString();
                         Double tva=(Double)obj.get("tva");
-                        String nomproduit= obj.get("nomproduit").toString();
+                        //String nomproduit= obj.get("nomproduit").toString();
                         String useremail=obj.get("useremail").toString();
                         Double totale=(Double) obj.get("totale");
                         String datefacture=obj.get("datefacture").toString();
@@ -73,8 +73,8 @@ public class ServiceFacture {
                         fact.setRefrancefacture(refrancefacture);
                         fact.setTva(tva);
                         fact.setDatefacture(datefacture);
-                        fact.setNomproduit(nomproduit);
-                        fact.setUseremail(useremail);
+                        //fact.setNomproduit(nomproduit);
+                        //fact.setUseremail(useremail);
                         fact.setTotale(totale);
                     
                         //insert data into ArrayList result

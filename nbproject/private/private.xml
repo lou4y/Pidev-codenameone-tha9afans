@@ -4,16 +4,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/3A13/semestre2/mobile/tha9afansgithub/Pidev-codenameone-tha9afans/src/tha9afans/entities/Commande.java</file>
-            <file>file:/D:/3A13/semestre2/mobile/tha9afansgithub/Pidev-codenameone-tha9afans/src/tha9afans/entities/CommandeProduit.java</file>
+            <file>file:/D:/3A13/semestre2/mobile/tha9afansgithub/Pidev-codenameone-tha9afans/src/tha9afans/services/ServiceEvenement.java</file>
+            <file>file:/D:/3A13/semestre2/mobile/tha9afansgithub/Pidev-codenameone-tha9afans/src/tha9afans/gui/AddEvent.java</file>
             <file>file:/D:/3A13/semestre2/mobile/tha9afansgithub/Pidev-codenameone-tha9afans/src/tha9afans/services/ServiceUser.java</file>
             <file>file:/D:/3A13/semestre2/mobile/tha9afansgithub/Pidev-codenameone-tha9afans/src/tha9afans/entities/PanierProduit.java</file>
+            <file>file:/D:/3A13/semestre2/mobile/tha9afansgithub/Pidev-codenameone-tha9afans/src/tha9afans/gui/HomeForm.java</file>
             <file>file:/D:/3A13/semestre2/mobile/tha9afansgithub/Pidev-codenameone-tha9afans/build.xml</file>
-            <file>file:/D:/3A13/semestre2/mobile/tha9afansgithub/Pidev-codenameone-tha9afans/src/tha9afans/services/ServiceFacture.java</file>
             <file>file:/D:/3A13/semestre2/mobile/tha9afansgithub/Pidev-codenameone-tha9afans/src/tha9afans/entities/Facture.java</file>
+            <file>file:/D:/3A13/semestre2/mobile/tha9afansgithub/Pidev-codenameone-tha9afans/src/tha9afans/services/ServiceFacture.java</file>
             <file>file:/D:/3A13/semestre2/mobile/tha9afansgithub/Pidev-codenameone-tha9afans/src/tha9afans/gui/FactureListForm.java</file>
             <file>file:/D:/3A13/semestre2/mobile/tha9afansgithub/Pidev-codenameone-tha9afans/src/tha9afans/utilities/Statics.java</file>
             <file>file:/D:/3A13/semestre2/mobile/tha9afansgithub/Pidev-codenameone-tha9afans/src/tha9afans/entities/Panier.java</file>
+            <file>file:/D:/3A13/semestre2/mobile/tha9afansgithub/Pidev-codenameone-tha9afans/src/tha9afans/gui/ViewEvent.java</file>
         </group>
     </open-files>
 </project-private>
