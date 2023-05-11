@@ -1,9 +1,19 @@
 package tha9afans.gui;
 
 import com.codename1.components.FloatingHint;
+import com.codename1.components.ImageViewer;
 import com.codename1.ui.*;
+import com.codename1.ui.geom.Dimension;
+import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.plaf.UIManager;
+import com.codename1.ui.util.Resources;
+import com.codename1.ui.Container;
+import com.codename1.ui.Display;
+import com.codename1.ui.plaf.Style;
 import tha9afans.services.ServiceUser;
+import com.codename1.ui.Component;
+import com.codename1.ui.plaf.Border;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Vector;
@@ -12,9 +22,57 @@ public class EditUser extends Form {
     public EditUser() {
         this.setLayout(BoxLayout.y());
         this.setTitle("Modifier votre profile");
-        this.getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, (evt) -> {
-            new HomeForm().showBack();
+        Resources theme = UIManager.initFirstTheme("/theme");
+        ImageViewer imglogo = new ImageViewer(theme.getImage("logo.png"));
+        imglogo.setPreferredSize(new Dimension(300, 300));
+        Toolbar tb = this.getToolbar();
+        //Image icon = theme.getImage("icon.png");
+        Label labeltha9afans=new Label("Tha9afans");
+        labeltha9afans.getAllStyles().setAlignment(Component.CENTER);
+        labeltha9afans.getAllStyles().setFgColor(0xffffff);
+        Container topBar = BorderLayout.east(labeltha9afans);
+        //topBar.add(BorderLayout.SOUTH, labeltha9afans);
+        topBar.setUIID("SideCommand");
+        tb.addComponentToSideMenu(topBar); 
+        Container sideMenuContainer = BorderLayout.center(new Label());
+        sideMenuContainer.setUIID("SideCommand");
+        sideMenuContainer.add(BorderLayout.NORTH, imglogo);
+       // Set the preferred height to 1 pixel
+
+        // Add the separator to the side menu container
+        //sideMenuContainer.add(separator);
+
+        // Add the menu items (Home, Produit, Evenement)
+
+        // Create the separator component
+        
+        tb.addComponentToSideMenu(sideMenuContainer);
+
+        tb.addMaterialCommandToSideMenu("Evenement", FontImage.MATERIAL_HOME, e -> {
+                new EventList().show();
+        }); 
+        //sideMenuContainer.add(separator);
+        tb.addMaterialCommandToSideMenu("Billet", FontImage.MATERIAL_WEB, e -> {});
+        tb.addMaterialCommandToSideMenu("Produit", FontImage.MATERIAL_SHOPPING_BAG, e -> {
+        // Add your logic for the "Produit" menu item here
         });
+
+        tb.addMaterialCommandToSideMenu("Facture", FontImage.MATERIAL_INFO, e -> {
+            new FactureListForm().show();
+        });
+        tb.addMaterialCommandToSideMenu("Profile", FontImage.MATERIAL_PERSON, e -> {
+                 new EditUser().show();
+        });
+
+        tb.addMaterialCommandToSideMenu("Quiz", FontImage.MATERIAL_GAMEPAD, e -> {
+           
+                new QuizHomeForm().show();
+        });
+        tb.addMaterialCommandToSideMenu("Déconnecter", FontImage.MATERIAL_EXIT_TO_APP, e -> {
+            ServiceUser.getInstance().deconnecter();
+        // Add your logout logic here
+        });
+
         TextField nom = new TextField("", "nom", 20, TextField.ANY);
         TextField prenom = new TextField("", "prenom", 20, TextField.ANY);
         TextField cin = new TextField("", "cin", 20, TextField.ANY);
@@ -44,17 +102,24 @@ public class EditUser extends Form {
         email.setSingleLineTextArea(false);
         adresse.setSingleLineTextArea(false);
         telephone.setSingleLineTextArea(false);
+        ImageViewer imguser = new ImageViewer(theme.getImage("user.png"));
+        imguser.setPreferredSize(new Dimension(350, 350));
 
         Button modifuserbutton = new Button("Modifier profile");
 
-        //signup.getAllStyles().setFgColor(0xF1FAEE);
-//        signup.getAllStyles().setBgTransparency(255);
-//        signup.getAllStyles().setAlignment(Component.CENTER);
-//        signup.getAllStyles().setBorder(Border.createEmpty())
-//        signup.getPressedStyle().setBgColor(0x001A23);
-//        signup.getPressedStyle().setFgColor(0xF1FAEE);
-//        signup.setWidth(50);
-//        signup.requestFocus();
+        modifuserbutton.getAllStyles().setBgColor(0x001A23);
+        modifuserbutton.getAllStyles().setFgColor(0xF1FAEE);
+        modifuserbutton.getAllStyles().setBgTransparency(255);
+        modifuserbutton.getAllStyles().setMarginUnit(Style.UNIT_TYPE_DIPS);
+        modifuserbutton.getAllStyles().setMargin(5, 0, 2, 2);
+        modifuserbutton.getAllStyles().setPaddingUnit(Style.UNIT_TYPE_DIPS);
+        modifuserbutton.getAllStyles().setPadding(5, 5, 5, 5);
+        modifuserbutton.getAllStyles().setAlignment(Component.CENTER);
+        modifuserbutton.getAllStyles().setBorder(Border.createEmpty());
+        modifuserbutton.getPressedStyle().setBgColor(0x001A23);
+        modifuserbutton.getPressedStyle().setFgColor(0xF1FAEE);
+        modifuserbutton.setWidth(50);
+        modifuserbutton.requestFocus();
         int id=SessionManager.getId();
         modifuserbutton.addActionListener((e) -> {
             try {
@@ -75,7 +140,7 @@ public class EditUser extends Form {
         labeltitle.getAllStyles().setFgColor(0x001A23);*/
         Container content = BoxLayout.encloseY(
                 labeltitle,
-                //imglogo,
+                imguser,
                 new FloatingHint(cin),
                 new FloatingHint(nom),
                 new FloatingHint(prenom),
