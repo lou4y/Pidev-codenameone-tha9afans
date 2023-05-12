@@ -40,8 +40,7 @@ public class ServiceReservation {
     }
 
     public List<Reservation> fetchReservations() {
-//        int id= SessionManager.getId();
-        int id=5;
+        int id= SessionManager.getId();
         String url = Statics.BASE_URL + "/apibilletreservation/showAllReservationByUser/json/"+id;
         conxRequest = new ConnectionRequest();
         conxRequest.setUrl(url);
@@ -58,6 +57,7 @@ public class ServiceReservation {
                             Reservation r = new Reservation();
                             System.out.println(reservation.get("id").toString());
                             r.setId(Float.parseFloat(reservation.get("id").toString()));
+                            r.setEventName(reservation.get("evenement").toString());
                             r.setDateReservation(reservation.get("dateReservation").toString());
                             Object nombreBilletObject = reservation.get("nombreBillet");
                             if (nombreBilletObject instanceof Number) {

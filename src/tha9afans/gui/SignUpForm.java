@@ -75,19 +75,19 @@ public class SignUpForm extends Form{
         Label alreadHaveAnAccount = new Label("Already have an account?");
         Button signupbutton = new Button("Sign Up");
 
-        signupbutton.getAllStyles().setBgColor(0x001A23);
-        signupbutton.getAllStyles().setFgColor(0xF1FAEE);
-        signupbutton.getAllStyles().setBgTransparency(255);
-        signupbutton.getAllStyles().setMarginUnit(Style.UNIT_TYPE_DIPS);
-        signupbutton.getAllStyles().setMargin(2, 5, 2, 2);
-        signupbutton.getAllStyles().setPaddingUnit(Style.UNIT_TYPE_DIPS);
-        signupbutton.getAllStyles().setPadding(5, 5, 5, 5);
-        signupbutton.getAllStyles().setAlignment(Component.CENTER);
-        signupbutton.getAllStyles().setBorder(Border.createEmpty());
-        signupbutton.getPressedStyle().setBgColor(0x001A23);
-        signupbutton.getPressedStyle().setFgColor(0xF1FAEE);
-        signupbutton.setWidth(50);
-        signupbutton.requestFocus();
+//        signupbutton.getAllStyles().setBgColor(0x001A23);
+//        signupbutton.getAllStyles().setFgColor(0xF1FAEE);
+//        signupbutton.getAllStyles().setBgTransparency(255);
+//        signupbutton.getAllStyles().setMarginUnit(Style.UNIT_TYPE_DIPS);
+//        signupbutton.getAllStyles().setMargin(2, 5, 2, 2);
+//        signupbutton.getAllStyles().setPaddingUnit(Style.UNIT_TYPE_DIPS);
+//        signupbutton.getAllStyles().setPadding(5, 5, 5, 5);
+//        signupbutton.getAllStyles().setAlignment(Component.CENTER);
+//        signupbutton.getAllStyles().setBorder(Border.createEmpty());
+//        signupbutton.getPressedStyle().setBgColor(0x001A23);
+//        signupbutton.getPressedStyle().setFgColor(0xF1FAEE);
+//        signupbutton.setWidth(50);
+//        signupbutton.requestFocus();
         signupbutton.addActionListener((e) -> {
             try {
                 
@@ -99,14 +99,14 @@ public class SignUpForm extends Form{
             //new SignInForm(res).show();
         });
         ImageViewer imglogo = new ImageViewer(theme.getImage("logo.png"));
-        imglogo.setPreferredSize(new Dimension(400, 400));
+//        imglogo.setPreferredSize(new Dimension(400, 400));
 
         Label labeltitle = new Label("Sign Up", "LogoLabel");
-        labeltitle.getAllStyles().setAlignment(Component.CENTER);
-        labeltitle.getAllStyles().setFgColor(0xffffff);
+//        labeltitle.getAllStyles().setAlignment(Component.CENTER);
+//        labeltitle.getAllStyles().setFgColor(0xffffff);
         Font labelFont = Font.createTrueTypeFont("native:MainLight", "native:MainLight").derive(Display.getInstance().convertToPixels(7, true), Font.STYLE_BOLD);
-        labeltitle.getUnselectedStyle().setFont(labelFont);
-        labeltitle.getAllStyles().setFgColor(0x001A23);
+//        labeltitle.getUnselectedStyle().setFont(labelFont);
+//        labeltitle.getAllStyles().setFgColor(0x001A23);
 
 
 

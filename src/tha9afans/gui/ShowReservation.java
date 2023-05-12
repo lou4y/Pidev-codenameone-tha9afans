@@ -2,6 +2,7 @@ package tha9afans.gui;
 
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.layouts.BoxLayout;
 import tha9afans.entities.Reservation;
@@ -23,9 +24,16 @@ public class ShowReservation extends Form {
         Label l1 = new Label("******************** Reservations ********************");
         this.add(l1);
         for (Reservation reservation : reservations) {
-            System.out.println(reservation);
+            Image studentIcon = FontImage.createMaterial(FontImage.MATERIAL_STAR, "Checkbox student", 4.0f);
+            int index = reservations.indexOf(reservation)+1;
+            Label l = new Label("Reservation N° : " + index);
+            this.add(studentIcon);
+            this.add(l);
             //create a ReservationComponent for each reservation
             this.add(new ReservationComponent(reservation));
+            Label l2 = new Label(" ");
+            this.add(l2);
+
         }
     }
 }

@@ -4,13 +4,15 @@ import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.layouts.BoxLayout;
+import com.google.zxing.WriterException;
 import tha9afans.entities.Ticket;
 
+import java.io.IOException;
 import java.util.List;
 
 public class ShowAllTickets extends Form {
 
-    public ShowAllTickets(List<Ticket> list) {
+    public ShowAllTickets(List<Ticket> list) throws IOException, WriterException {
         this.setLayout(BoxLayout.y());
         this.setTitle("show Billet of the event");
         this.getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, (evt) -> {

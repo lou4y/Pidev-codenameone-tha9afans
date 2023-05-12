@@ -8,6 +8,8 @@ import com.codename1.l10n.SimpleDateFormat;
 import com.codename1.ui.*;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.spinner.Picker;
+
+import com.google.zxing.WriterException;
 import tha9afans.entities.Billet;
 import tha9afans.entities.Evenement;
 import tha9afans.entities.Ticket;
@@ -120,12 +122,20 @@ public class AddBillet  extends Form{
         Button showAllBtn = new Button("Show all");
         showAllBtn.addActionListener(e -> {
             List<Ticket> list = new ArrayList<>();
+
             try {
                 list = serviceBillet.getTicketsByEventId(idEvent);
-                new ShowAllTickets(list).show();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+            try {
+                new ShowAllTickets(list).show();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
         });
 
 

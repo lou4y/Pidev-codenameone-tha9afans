@@ -12,6 +12,7 @@ import java.util.Date;
  */
 public class Reservation {
     private float id;
+    private String eventName;
     private String dateReservation;
     private String status;
     private String paymentInfo;
@@ -60,6 +61,14 @@ public class Reservation {
         this.telephone = telephone;
         this.address = address;
         this.billetReservers = billetReservers;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
     public String getAddress() {
@@ -188,14 +197,20 @@ public class Reservation {
     public String toString() {
         return "Reservation{" +
                 "id=" + id +
+                ", eventName='" + eventName + '\'' +
                 ", dateReservation='" + dateReservation + '\'' +
+                ", status='" + status + '\'' +
+                ", paymentInfo='" + paymentInfo + '\'' +
                 ", totalPrice=" + totalPrice +
                 ", paymentStatus='" + paymentStatus + '\'' +
+                ", user=" + user +
+                ", location='" + location + '\'' +
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", email='" + email + '\'' +
                 ", telephone='" + telephone + '\'' +
                 ", address='" + address + '\'' +
+                ", billetReservers=" + billetReservers +
                 ", nombreBillet=" + nombreBillet +
                 '}';
     }

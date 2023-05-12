@@ -8,9 +8,16 @@
       <root url="jar://$PROJECT_DIR$/../../../../../Projects/javafx/lib/smtpapi-java.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../activation-1.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../javax.mail-1.6.2.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/zxing-core-1.7.jar/zxing-core-1.7.jar!/" />
       <root url="jar://$USER_HOME$/Downloads/core-3.4.1.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/zxing-javase.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/core-3.4.1 (1).jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/Downloads/javase-3.1.1-20150211.225955-15-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Downloads/javase-3.1.1-20150211.225955-15-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>
