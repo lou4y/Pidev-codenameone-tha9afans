@@ -8,6 +8,7 @@
       <root url="jar://$PROJECT_DIR$/../../../../../Projects/javafx/lib/smtpapi-java.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../activation-1.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../javax.mail-1.6.2.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/core-3.4.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

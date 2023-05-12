@@ -20,6 +20,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Map;
 import java.util.Vector;
+import tha9afans.gui.LoginForm;
 
 public class ServiceUser {
     public static ServiceUser instance=null;
@@ -100,11 +101,12 @@ public class ServiceUser {
                     System.out.println("data ===>"+responseData);
                 }
         );
+         //ba3d execution ta3 requete ely heya url nestanaw response ta3 server.
+        NetworkManager.getInstance().addToQueueAndWait(req);
         }
 
 
-        //ba3d execution ta3 requete ely heya url nestanaw response ta3 server.
-        NetworkManager.getInstance().addToQueueAndWait(req);
+       
 
     }
     public void signin(TextField email,TextField password) {
@@ -186,6 +188,22 @@ public class ServiceUser {
         return json;
     
     }
+     public void deconnecter() {
+        // Clear user data from the session
+        SessionManager.setId(0);
+        SessionManager.setNom("");
+        SessionManager.setEmail("");
+        SessionManager.setPrenom("");
+        SessionManager.setCin("");
+        SessionManager.setTelephone("");
+        SessionManager.setGenre("");
+        SessionManager.setAdresse("");
+        SessionManager.setPassowrd("");
+        SessionManager.setDateNaissance("");
+
+    // Show the login form
+        new LoginForm().show();
+     }
 
 
 }

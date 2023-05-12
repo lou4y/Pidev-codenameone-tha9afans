@@ -4,19 +4,24 @@
  */
 package tha9afans.services;
 
-import com.codename1.io.ConnectionRequest;
-import com.codename1.io.JSONParser;
-import com.codename1.io.NetworkEvent;
-import com.codename1.io.NetworkManager;
+import com.codename1.io.*;
+import com.codename1.l10n.ParseException;
+import com.codename1.l10n.SimpleDateFormat;
+import com.codename1.ui.PickerComponent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.util.regex.StringReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+//import java.time.LocalDateTime;
+//import java.time.format.DateTimeFormatter;
+//import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import tha9afans.entities.Billet;
+import tha9afans.entities.Evenement;
 import tha9afans.entities.Ticket;
 import tha9afans.utilities.Statics;
 
@@ -25,7 +30,8 @@ import tha9afans.utilities.Statics;
  * @author Ibrahim
  */
 public class ServiceBillet {
-    
+
+    boolean resultOK = false;
     public static ServiceBillet instance = null;
     
     private ConnectionRequest conxRequest ;
@@ -34,29 +40,85 @@ public class ServiceBillet {
         conxRequest = new ConnectionRequest();
     }
     
-    public ServiceBillet getConnection(){
+    public static ServiceBillet getInstance(){
         if (instance == null){
             instance = new ServiceBillet();
         }
         return instance;
     }
-    
-    public void ajouterBillet(int idEvent, Billet billet){
+
+
+    public boolean  ajouterBillet(int idEvent, Billet billet){
+        conxRequest=new ConnectionRequest();
         String url = Statics.BASE_URL+"/apibilletreservation/"+idEvent+"/new/json";
         conxRequest.setUrl(url);
         conxRequest.setHttpMethod("POST");
-// to tell to the server that we will sent you json format.
-        conxRequest.setContentType("application/json");
-        
-        conxRequest.addArgument("type", billet.getType());
-        conxRequest.addArgument("prix", String.valueOf(billet.getPrix()));
-        conxRequest.addArgument("dateValidite", billet.getDateValidite().toString());
-        conxRequest.addArgument("nbrBilletAvailable", String.valueOf(billet.getNbrBilletAvailable()));
 
+        conxRequest.addArgument("type", billet.getType());
+        System.out.println("type = " + billet.getType());
+        conxRequest.addArgument("prix", String.valueOf(billet.getPrix()));
+        System.out.println("prix = " + billet.getPrix());
+        String formattedDate = new SimpleDateFormat("yyyy-MM-dd").format(billet.getDateValidite());
+        conxRequest.addArgument("dateValidite", formattedDate);
+        System.out.println("dateValidite = " + formattedDate);
+        conxRequest.addArgument("nbrBilletAvailable", String.valueOf(billet.getNbrBilletAvailable()));
+        System.out.println("nbrBilletAvailable = " + billet.getNbrBilletAvailable());
+        conxRequest.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = conxRequest.getResponseCode() == 200;
+                conxRequest.removeResponseListener(this);
+            }
+        });
         NetworkManager.getInstance().addToQueueAndWait(conxRequest);
+
+        return resultOK;
     }
-    
-    
+
+    public ArrayList<String> getEvents(PickerComponent date) {
+        ArrayList<String> listEvents = new ArrayList<>();
+        String url = Statics.BASE_URL + "/apievenement/all/json";
+        conxRequest.setUrl(url);
+        conxRequest.setHttpMethod("GET");
+        conxRequest.addResponseListener((NetworkEvent evt) -> {
+            JSONParser jsonp = new JSONParser();
+            try {
+                Map<String, Object> events = jsonp.parseJSON(new InputStreamReader(new ByteArrayInputStream(conxRequest.getResponseData()), "UTF-8"));
+                List<Map<String, Object>> list = (List<Map<String, Object>>) events.get("evenement");
+                for (Map<String, Object> obj : list) {
+                    String id = obj.get("id").toString();
+                    String nom = obj.get("nom").toString();
+                    String dateStr = obj.get("date").toString();
+                        listEvents.add(id + " - " + nom);
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        Date initialDate = dateFormat.parse(dateStr);
+                       if (listEvents.size() == 1) {
+                            date.getPicker().setDate(initialDate);
+                       }
+                }
+                System.out.println("listEvents = " + listEvents);
+            } catch (IOException ex) {
+                System.out.println("error related to IO operation");
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            // catch (DateTimeParseException ex) {
+              //  System.out.println("error parsing date: " + ex.getMessage());
+            //} 
+        });
+        conxRequest.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = conxRequest.getResponseCode() == 200;
+                conxRequest.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(conxRequest);
+        System.out.println(resultOK);
+        return listEvents;
+    }
+
+
     public void editBillet(int id, Billet billet) {
         String url = Statics.BASE_URL+"/apibilletreservation/"+id+"/edit/json";
         conxRequest.setUrl(url);
@@ -74,89 +136,76 @@ public class ServiceBillet {
         conxRequest.setHttpMethod("DELETE");
         NetworkManager.getInstance().addToQueueAndWait(conxRequest);
     }
-    
 
-//   public Ticket showBillet(int billetId) {
-//    String url = Statics.BASE_URL+"/apibilletreservation/" + billetId + "/show/json";
-//    conxRequest.setUrl(url);
-//
-//    conxRequest.addResponseListener((NetworkEvent evt) -> {
-//        byte[] bytes = conxRequest.getResponseData();
-//        String json = new String(bytes);
-//        JSONParser parser = new JSONParser();
-//        try {
-//            Map<String, Object> data = parser.parseJSON(new StringReader(json));
-//            String nomE = (String) data.get("nomE");
-//            String nomC = (String) data.get("nomC");
-//            String adresse = (String) data.get("adresse");
-//            String code = (String) data.get("code");
-//            Double prix = (Double) data.get("prix");
-//            String date = (String) data.get("date");
-//            String type = (String) data.get("type");
-//            Integer nbrBilletAvailable = (Integer) data.get("nbrBilletAvailable");
-//
-//            Ticket ticket = new Ticket(nomE, nomC, adresse, code, prix, date, type, nbrBilletAvailable);
-//            return ticket;
-//            // display the ticket on your interface
-//            // it may return the ticket if u want just return null and . You can then do whatever you need with the ticket
-//            //object inside the listener, e.g. display it on the GUI.
-//
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
-//    });
-//
-//    conxRequest.setFailSilently(true);
-//    NetworkManager.getInstance().addToQueue(conxRequest);
-//
-//    // if no ticket is returned in the listener, return null
-//    return null;
-//}
-//
-//
-//   public ArrayList<Ticket> getTicketsByEventId(int eventId) throws IOException {
-//    String url = Statics.BASE_URL+"/apibilletreservation/" + eventId + "/showAllByEvent/json";
-//
-//    conxRequest.setUrl(url);
-//    conxRequest.setPost(false);
-//    conxRequest.setContentType("application/json");
-//
-//    conxRequest.addResponseListener((NetworkEvent e) -> {
-//        try {
-//            JSONParser parser = new JSONParser();
-//            Map<String, Object> data = parser.parseJSON(new InputStreamReader(new ByteArrayInputStream(conxRequest.getResponseData()), "UTF-8"));
-//
-//            // extract the event and billet data
-//            Map<String, Object> eventMap = (Map<String, Object>) data.get("event");
-//            Map<String, Object>[] billetArray = (Map<String, Object>[]) data.get("billet");
-//
-//            // create a new list to hold the tickets
-//            List<Ticket> ticketList = new ArrayList<>();
-//
-//            // iterate through the billet array and create Ticket objects
-//            for (Map<String, Object> billetMap : billetArray) {
-//                Ticket ticket = new Ticket(
-//                        (String) eventMap.get("nomE"),
-//                        (String) eventMap.get("nomC"),
-//                        (String) eventMap.get("adresse"),
-//                        (String) billetMap.get("code"),
-//                        ((Double) billetMap.get("prix")).doubleValue(),
-//                        (String) billetMap.get("dateValidite"),
-//                        (String) billetMap.get("type"),
-//                        ((Integer) billetMap.get("nbrBilletAvailable")).intValue()
-//                );
-//                ticketList.add(ticket);
-//            }
-//
-//            // return the list of tickets
-//            return ticketList;
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
-//    });
-//
-//    NetworkManager.getInstance().addToQueueAndWait(conxRequest);
-//        return null;
-//    }
-   
+    public List<Ticket> getTicketsByEventId(int eventId) throws IOException {
+        conxRequest = new ConnectionRequest();
+        String url = Statics.BASE_URL+"/apibilletreservation/" + eventId + "/showAllByEvent/json";
+        conxRequest.setUrl(url);
+        conxRequest.setPost(false);
+        conxRequest.setContentType("application/json");
+        List<Ticket> ticketList = new ArrayList<>();
+        conxRequest.addResponseListener((NetworkEvent e) -> {
+            JSONParser j = new JSONParser();
+            try {
+                Map<String, Object> tickets = j.parseJSON(new CharArrayReader(new String(conxRequest.getResponseData()).toCharArray()));
+                List<Map<String, Object>> list = (List<Map<String, Object>>) tickets.get("billet");
+                for (Map<String, Object> obj : list) {
+                    Ticket ticket = new Ticket();
+                    ticket.setId(Float.parseFloat(obj.get("id").toString()));
+                    ticket.setNomE(obj.get("nomE").toString());
+
+                    if (obj.get("nomC") != null) {
+                        ticket.setNomC(obj.get("nomC").toString());
+                    } else {
+                        ticket.setNomC("");
+                    }
+
+                    if (obj.get("address") != null) {
+                        ticket.setAdresse(obj.get("address").toString());
+                    } else {
+                        ticket.setAdresse("");
+                    }
+
+                    if (obj.get("code") != null) {
+                        ticket.setCode(obj.get("code").toString());
+                    } else {
+                        ticket.setCode("");
+                    }
+
+                    ticket.setPrix((int) Float.parseFloat(obj.get("prix").toString()));
+
+                    if (obj.get("dateValidite") != null) {
+                        ticket.setDate(obj.get("dateValidite").toString());
+                    } else {
+                        ticket.setDate("");
+                    }
+
+                    if (obj.get("type") != null) {
+                        ticket.setType(obj.get("type").toString());
+                    } else {
+                        ticket.setType("");
+                    }
+
+                    ticket.setNbrBilletAvailable((int) Float.parseFloat(obj.get("nbrBilletAvailable").toString()));
+                    ticketList.add(ticket);
+                }
+
+            } catch (IOException ex) {
+                System.out.println("error related to IO operation");
+            } catch (NumberFormatException ex) {
+                System.out.println("error parsing number: " + ex.getMessage());
+            } catch (NullPointerException ex) {
+                System.out.println("got a null value from the server: " + ex.getMessage());
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(conxRequest);
+        return ticketList;
+    }
+
+
+
+
+
+
+
 }

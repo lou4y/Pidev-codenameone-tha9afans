@@ -11,8 +11,8 @@ import java.util.Date;
  * @author Ibrahim
  */
 public class Reservation {
-    private int id;
-    private Date dateReservation;
+    private float id;
+    private String dateReservation;
     private String status;
     private String paymentInfo;
     private int totalPrice;
@@ -25,10 +25,11 @@ public class Reservation {
     private String telephone;
     private String address;
     private BilletReserver billetReservers;
-
+    private int nombreBillet;
     public Reservation() {
     }
-    public Reservation(int id, Date dateReservation, String status, String paymentInfo, int totalPrice, String paymentStatus, User user, String location, String nom, String prenom, String email, String telephone, String address, BilletReserver billetReservers) {
+
+    public Reservation(float id, String dateReservation,int nombreBillet, String status, String paymentInfo, int totalPrice, String paymentStatus, User user, String location, String nom, String prenom, String email, String telephone, String address, BilletReserver billetReservers) {
         this.id = id;
         this.dateReservation = dateReservation;
         this.status = status;
@@ -43,8 +44,9 @@ public class Reservation {
         this.telephone = telephone;
         this.address = address;
         this.billetReservers = billetReservers;
+        this.nombreBillet=nombreBillet;
     }
-    public Reservation(Date dateReservation, String status, String paymentInfo, int totalPrice, String paymentStatus, User user, String location, String nom, String prenom, String email, String telephone, String address, BilletReserver billetReservers) {
+    public Reservation(String dateReservation, String status, String paymentInfo, int totalPrice, String paymentStatus, User user, String location, String nom, String prenom, String email, String telephone, String address, BilletReserver billetReservers) {
         this.dateReservation = dateReservation;
         this.status = status;
         this.paymentInfo = paymentInfo;
@@ -68,7 +70,7 @@ public class Reservation {
         return billetReservers;
     }
 
-    public Date getDateReservation() {
+    public String getDateReservation() {
         return dateReservation;
     }
 
@@ -76,7 +78,13 @@ public class Reservation {
         return email;
     }
 
-    public int getId() {
+    public int getNombreBillet() {
+        return nombreBillet;
+    }
+
+
+
+    public float getId() {
         return id;
     }
 
@@ -124,7 +132,7 @@ public class Reservation {
         this.billetReservers = billetReservers;
     }
 
-    public void setDateReservation(Date dateReservation) {
+    public void setDateReservation(String dateReservation) {
         this.dateReservation = dateReservation;
     }
 
@@ -132,7 +140,7 @@ public class Reservation {
         this.email = email;
     }
 
-    public void setId(int id) {
+    public void setId(float id) {
         this.id = id;
     }
 
@@ -168,8 +176,27 @@ public class Reservation {
         this.totalPrice = totalPrice;
     }
 
+    public void setNombreBillet(int nombreBillet) {
+        this.nombreBillet = nombreBillet;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
-      
+
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "id=" + id +
+                ", dateReservation='" + dateReservation + '\'' +
+                ", totalPrice=" + totalPrice +
+                ", paymentStatus='" + paymentStatus + '\'' +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", email='" + email + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", address='" + address + '\'' +
+                ", nombreBillet=" + nombreBillet +
+                '}';
+    }
 }

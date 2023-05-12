@@ -13,11 +13,11 @@ import java.util.Date;
 public class Billet {
     private int id;
     private String code;
-    private Date dateValidite;
-    private float prix;
+    private String dateValidite;
+    private double prix;
     private String type;
     private int nbrBilletAvailable;
-    private Evenement evenement;
+    private int evenementId;
     private BilletReserver billetReserver;
     private String qrCodeDataUri;
     
@@ -26,25 +26,21 @@ public class Billet {
     }
     
     
-    public Billet(String code, Date dateValidite, float prix, String type, int nbrBilletAvailable, Evenement evenement, BilletReserver billetReserver, String qrCodeDataUri) {
-        this.code = code;
+    public Billet(String dateValidite, float prix, String type, int nbrBilletAvailable) {
         this.dateValidite = dateValidite;
         this.prix = prix;
         this.type = type;
         this.nbrBilletAvailable = nbrBilletAvailable;
-        this.evenement = evenement;
-        this.billetReserver = billetReserver;
-        this.qrCodeDataUri = qrCodeDataUri;
     }
 
-    public Billet(int id, String code, Date dateValidite, float prix, String type, int nbrBilletAvailable, Evenement evenement, BilletReserver billetReserver, String qrCodeDataUri) {
+    public Billet(int id, String code, String dateValidite, float prix, String type, int nbrBilletAvailable, int evenement, BilletReserver billetReserver, String qrCodeDataUri) {
         this.id = id;
         this.code = code;
         this.dateValidite = dateValidite;
         this.prix = prix;
         this.type = type;
         this.nbrBilletAvailable = nbrBilletAvailable;
-        this.evenement = evenement;
+        this.evenementId = evenement;
         this.billetReserver = billetReserver;
         this.qrCodeDataUri = qrCodeDataUri;
     }
@@ -65,19 +61,19 @@ public class Billet {
         this.code = code;
     }
 
-    public Date getDateValidite() {
+    public String getDateValidite() {
         return dateValidite;
     }
 
-    public void setDateValidite(Date dateValidite) {
+    public void setDateValidite(String dateValidite) {
         this.dateValidite = dateValidite;
     }
 
-    public float getPrix() {
+    public double getPrix() {
         return prix;
     }
 
-    public void setPrix(float prix) {
+    public void setPrix(double prix) {
         this.prix = prix;
     }
 
@@ -113,13 +109,43 @@ public class Billet {
         this.billetReserver = billetReserver;
     }
 
-    public Evenement getEvenement() {
-        return evenement;
+    public int getEvenement() {
+        return evenementId;
     }
 
-    public void setEvenement(Evenement evenement) {
-        this.evenement = evenement;
+    public void setEvenement(int evenement) {
+        this.evenementId = evenement;
     }
 
+    @Override
+    public String toString() {
+        return "Billet{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", dateValidite=" + dateValidite +
+                ", prix=" + prix +
+                ", type='" + type + '\'' +
+                ", nbrBilletAvailable=" + nbrBilletAvailable +
+                ", evenementId=" + evenementId +
+                ", billetReserver=" + billetReserver +
+                ", qrCodeDataUri='" + qrCodeDataUri + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Billet billet = (Billet) o;
+
+        return Double.compare(billet.prix, prix) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        long temp = Double.doubleToLongBits(prix);
+        return (int) (temp ^ (temp >>> 32));
+    }
 }
 
